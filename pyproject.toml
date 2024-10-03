@@ -1,0 +1,42 @@
+[build-system]
+requires = [
+    "setuptools",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+dynamic = ["version"]
+name = "app"
+requires-python = ">=3.11, <3.12"
+dependencies = [
+    # fastapi
+    "fastapi",
+    "uvicorn[standard]",
+    "uvloop",
+    "gunicorn",
+
+    # onnxruntime
+    "onnxruntime",
+
+    # numpy
+    "numpy",
+]
+
+[project.optional-dependencies]
+tests = [
+    "coverage",
+    "parameterized",
+    "pytest",
+]
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
+
+[tool.setuptools]
+include-package-data = true
+zip-safe = false
+
+[tool.setuptools.packages.find]
+exclude = ["tests"]
+namespaces = false

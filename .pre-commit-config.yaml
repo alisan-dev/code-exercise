@@ -1,0 +1,39 @@
+# Install the git hook scripts, run `$ pre-commit install` to set up the git hook scripts
+# Run against all the files, `$ pre-commit run --all-files`
+# Updating hooks automatically: `$ pre-commit autoupdate`
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+
+  - repo: https://github.com/pycqa/flake8
+    rev: 7.1.1
+    hooks:
+      - id: flake8
+        args: ["--ignore", "E203"]
+        exclude: "build|tests"
+        additional_dependencies:
+          [
+            "flake8-bugbear",
+            "flake8-import-order",
+            "flake8-typing-imports",
+            "flake8-colors",
+            "flake8-print",
+            "flake8-comprehensions",
+            "pep8-naming",
+          ]
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.11.2
+    hooks:
+      - id: mypy
+        exclude: "build|tests|.tox"
+        additional_dependencies:
+          [
+            "types-requests",
+            "types-python-slugify",
+          ]
